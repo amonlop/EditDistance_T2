@@ -72,17 +72,20 @@ int editDistanceRecursiveMemoization(string s1, string s2, int size_s1, int size
 int editDistanceDP(const string &s1, const string &s2) {
     const int s1_size = s1.length();
     const int s2_size = s2.length();
-    vector<vector<int>> matriz(s1_size + 1, vector<int>(s2_size + 1));
 
-    for (int i = 0; i <= s1_size; i++) {
+    const int FILAS = s1_size + 1;
+    const int COLUMNAS = s2_size + 1;
+    vector<vector<int>> matriz(FILAS, vector<int>(COLUMNAS));
+
+    for (int i = 0; i < FILAS; i++) {
         matriz[i][0] = i;
     }
-    for (int j = 0; j <= s2_size; j++) {
+    for (int j = 0; j < COLUMNAS; j++) {
         matriz[0][j] = j;
     }
 
-    for (int i = 1; i <= s1_size; i++) {
-        for (int j = 1; j <= s2_size; j++) {
+    for (int i = 1; i < FILAS; i++) {
+        for (int j = 1; j < COLUMNAS; j++) {
             if (s1[i-1] == s2[j-1]) {
                 matriz[i][j] = matriz[i-1][j-1];
             } else {
@@ -92,6 +95,38 @@ int editDistanceDP(const string &s1, const string &s2) {
     }
 
     return matriz[s1_size][s2_size];
+}
+
+// Bajamos espacio de (s1_size + 1)(s2_size + 1) a 2 * (s2_size + 1)
+// O(S * T) -> O(T)
+int editDistanceDPOptimized(const string &s1, const string &s2) {
+    const int s1_size = s1.length();
+    const int s2_size = s2.length();
+
+    const int FILAS = 2;
+    const int COLUMNAS = s2_size + 1;
+    vector<vector<int>> matriz(FILAS, vector<int>(COLUMNAS));
+
+    for (int i = 0; i < FILAS; i++) {
+        matriz[i][0] = i;
+    }
+    for (int j = 0; j < COLUMNAS; j++) {
+        matriz[0][j] = j;
+    }
+
+    for (int i = 1; i < s1_size + 1; i++) {
+        matriz[1][0] = i;
+        for (int j = 1; j < COLUMNAS; j++) {
+            if (s1[i-1] == s2[j-1]) {
+                matriz[1][j] = matriz[0][j-1];
+            } else {
+                matriz[1][j] = 1 + min(matriz[0][j],matriz[1][j-1]);
+            }
+        }
+        matriz[0] = matriz[1];
+    }
+
+    return matriz[0][s2_size];
 }
 
 #endif
