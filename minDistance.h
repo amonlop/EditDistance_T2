@@ -3,13 +3,13 @@
 
 #include <string>
 #include <vector>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
 
 //costo minimo para convertir s1 en s2
-int editDistanceRecursive(string s1, string s2, int size_s1, int size_s2) {
+int editDistanceRecursive(const string &s1, const string &s2, const int size_s1, const int size_s2) {
 
     //costo de insertar todo lo que falta en s2
     if(size_s1 == 0) {
@@ -32,7 +32,7 @@ int editDistanceRecursive(string s1, string s2, int size_s1, int size_s2) {
 
 
 //Con memoization, enfoque top-down
-int editDistanceRecursiveMemoization(string s1, string s2, int size_s1, int size_s2, vector<vector<int>> &matriz) {
+int editDistanceRecursiveMemoization(const string &s1, const string &s2, const int size_s1, const int size_s2, vector<vector<int>> &matriz) {
     //costo de insertar todo lo que falta en s2
     if(size_s1 == 0) {
         return size_s2;
@@ -67,6 +67,31 @@ int editDistanceRecursiveMemoization(string s1, string s2, int size_s1, int size
     return editDistanceRecursiveMemoization(s1, s2, size_s1, size_s2, matriz);
 }
 
+// A continuacion las funciones con programacion dinamica
 
+int editDistanceDP(const string &s1, const string &s2) {
+    const int s1_size = s1.length();
+    const int s2_size = s2.length();
+    vector<vector<int>> matriz(s1_size + 1, vector<int>(s2_size + 1));
+
+    for (int i = 0; i <= s1_size; i++) {
+        matriz[i][0] = i;
+    }
+    for (int j = 0; j <= s2_size; j++) {
+        matriz[0][j] = j;
+    }
+
+    for (int i = 1; i <= s1_size; i++) {
+        for (int j = 1; j <= s2_size; j++) {
+            if (s1[i-1] == s2[j-1]) {
+                matriz[i][j] = matriz[i-1][j-1];
+            } else {
+                matriz[i][j] = 1 + min(matriz[i-1][j],matriz[i][j-1]);
+            }
+        }
+    }
+
+    return matriz[s1_size][s2_size];
+}
 
 #endif
