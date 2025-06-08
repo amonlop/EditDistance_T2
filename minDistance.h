@@ -32,7 +32,7 @@ int editDistanceRecursive(const string &s1, const string &s2, const int size_s1,
 
 
 //Con memoization, enfoque top-down
-int editDistanceRecursiveMemoization(const string &s1, const string &s2, const int size_s1, const int size_s2, vector<vector<int>> &matriz) {
+int editDistanceRecursiveMemo(const string &s1, const string &s2, const int size_s1, const int size_s2, vector<vector<int>> &matriz) {
     //costo de insertar todo lo que falta en s2
     if(size_s1 == 0) {
         return size_s2;
@@ -50,25 +50,26 @@ int editDistanceRecursiveMemoization(const string &s1, const string &s2, const i
 
     //si los caracteres son iguales
     if (s1[size_s1 - 1] == s2[size_s2 - 1]) {
-        return matriz[size_s1][size_s2] = editDistanceRecursiveMemoization(s1, s2, size_s1 - 1, size_s2 - 1, matriz);
+        return matriz[size_s1][size_s2] = editDistanceRecursiveMemo(s1, s2, size_s1 - 1, size_s2 - 1, matriz);
     }
 
     //si los caracteres son distintos
-    return matriz[size_s1][size_s2] = 1 + min( editDistanceRecursiveMemoization(s1, s2, size_s1 - 1, size_s2, matriz),    //costo eliminar
-                                               editDistanceRecursiveMemoization(s1, s2, size_s1, size_s2 -1, matriz));   //costo insercion
+    return matriz[size_s1][size_s2] = 1 + min( editDistanceRecursiveMemo(s1, s2, size_s1 - 1, size_s2, matriz),    //costo eliminar
+                                               editDistanceRecursiveMemo(s1, s2, size_s1, size_s2 -1, matriz));   //costo insercion
                                             
 }
 
 //funcion auxiliar para declarar la matriz
-int editDistanceRecursiveMemoization(string s1, string s2, int size_s1, int size_s2) {
-    //se crea una matriz inicializada en -1
+int editDistanceRecursiveMemo(string s1, string s2, int size_s1, int size_s2) {
+    //se crea una matriz inicializada en -1, fila y columna extra para manejar los casos donde una de las cadenas esta vacia
     vector<vector<int>> matriz(size_s1 + 1, vector<int>(size_s2 + 1, -1));
 
-    return editDistanceRecursiveMemoization(s1, s2, size_s1, size_s2, matriz);
+    return editDistanceRecursiveMemo(s1, s2, size_s1, size_s2, matriz);
 }
 
-// A continuacion las funciones con programacion dinamica
 
+
+// A continuacion las funciones con programacion dinamica
 int editDistanceDP(const string &s1, const string &s2) {
     const int s1_size = s1.length();
     const int s2_size = s2.length();
