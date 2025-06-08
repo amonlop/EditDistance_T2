@@ -99,9 +99,21 @@ int editDistanceDP(const string &s1, const string &s2) {
 
 // Bajamos espacio de (s1_size + 1)(s2_size + 1) a 2 * (s2_size + 1)
 // O(S * T) -> O(T)
+
+// v2 Correcion: ahora las columnas son del tamano de la str mas corta, por lo que
+// O(T) -> O(min(S,T))
 int editDistanceDPOptimized(const string &s1, const string &s2) {
-    const int s1_size = s1.length();
-    const int s2_size = s2.length();
+
+    const string* s1_ptr = &s1;
+    const string* s2_ptr = &s2;
+
+    if (s1_ptr->length() < s2_ptr->length()) {
+        swap(s1_ptr, s2_ptr);
+    }
+
+    // Aca swapeamos los punteros para tomar la str de menor valor
+    const int s1_size = s1_ptr->length();
+    const int s2_size = s2_ptr->length();
 
     const int FILAS = 2;
     const int COLUMNAS = s2_size + 1;
@@ -115,18 +127,19 @@ int editDistanceDPOptimized(const string &s1, const string &s2) {
     }
 
     for (int i = 1; i < s1_size + 1; i++) {
-        matriz[1][0] = i;
+        int actual = i % 2;
+        int prev = (i - 1) % 2;
+        matriz[actual][0] = i;
         for (int j = 1; j < COLUMNAS; j++) {
-            if (s1[i-1] == s2[j-1]) {
-                matriz[1][j] = matriz[0][j-1];
+            if ((*s1_ptr)[i-1] == (*s2_ptr)[j-1]) {
+                matriz[actual][j] = matriz[prev][j-1];
             } else {
-                matriz[1][j] = 1 + min(matriz[0][j],matriz[1][j-1]);
+                matriz[actual][j] = 1 + min(matriz[prev][j],matriz[actual][j-1]);
             }
         }
-        matriz[0] = matriz[1];
     }
 
-    return matriz[0][s2_size];
+    return matriz[s1_size % 2][s2_size];
 }
 
 #endif
