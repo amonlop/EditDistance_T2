@@ -28,7 +28,7 @@ void test_EditDistanceRecursiveMemoization() {
             if (i != j) {
                 string palabra1 = palabras[i];
                 string palabra2 = palabras[j];
-                int resultado = editDistanceRecursiveMemoization(palabra1, palabra2, palabra1.size(), palabra2.size());
+                int resultado = editDistanceRecursiveMemo(palabra1, palabra2, palabra1.size(), palabra2.size());
                 cout << "Edit Distance Recursive Memoization (" << palabra1 << ", " << palabra2 << ") = " << resultado << endl;
             }
         }
@@ -83,7 +83,7 @@ void test_ResultConsistency() {
                 string palabra1 = palabras[i];
                 string palabra2 = palabras[j];
                 int r1 = editDistanceRecursive(palabra1, palabra2, palabra1.size(), palabra2.size());
-                int r2 = editDistanceRecursiveMemoization(palabra1, palabra2, palabra1.size(), palabra2.size());
+                int r2 = editDistanceRecursiveMemo(palabra1, palabra2, palabra1.size(), palabra2.size());
                 int r3 = editDistanceDP(palabra1, palabra2);
                 int r4 = editDistanceDPOptimized(palabra1, palabra2);
                 if (r1 != r2 || r1 != r3 || r1 != r4) {
