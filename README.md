@@ -19,7 +19,7 @@ Después de ejecutar el comando anterior, los siguientes binarios estarán dispo
 - `experimento_algo2`
 - `experimento_algo3`
 - `experimento_algo4`
-- 
+  
 Cada uno de estos ejecutables corresponde a una variante de cálculo de distancia de edición:
 - `experimento_algo1` corresponde al algoritmo recursivo.
 - `experimento_algo2` corresponde al algoritmo recursivo con memoización.
