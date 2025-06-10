@@ -19,8 +19,14 @@ Después de ejecutar el comando anterior, los siguientes binarios estarán dispo
 - `experimento_algo2`
 - `experimento_algo3`
 - `experimento_algo4`
-
-Cada uno de estos ejecutables corresponde a una variante de cálculo de distancia de edición, sumado al main que testea los casos de prueba iniciales ("kitten", "sitting", "listen", "silent").
+- 
+Cada uno de estos ejecutables corresponde a una variante de cálculo de distancia de edición:
+- `experimento_algo1` corresponde al algoritmo recursivo.
+- `experimento_algo2` corresponde al algoritmo recursivo con memoización.
+- `experimento_algo3` corresponde al algoritmo con programación dinámica.
+- `experimento_algo4` corresponde al algoritmo optimizado.
+  
+El main testea los casos de prueba iniciales ("kitten", "sitting", "listen", "silent").
 
 ## Ejecutar
 Para ejecutar los binarios experimento_algoX, con X = 1,2,3,4, usa el siguiente formato:
