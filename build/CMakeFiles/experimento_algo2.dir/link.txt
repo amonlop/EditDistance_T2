@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/experimento_algo2.dir/experimentos.cpp.o -o experimento_algo2 

@@ -1,0 +1,7 @@
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/main.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/experimento_algo1.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/experimento_algo2.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/experimento_algo3.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/experimento_algo4.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/edit_cache.dir
+/home/amonlop/Universidad/Cuarto/analisis_alg/EditDistance_T2/build/CMakeFiles/rebuild_cache.dir
